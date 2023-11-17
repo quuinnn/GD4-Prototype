@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=3 uid="uid://k4jegxrfa0xq"]
+
+[ext_resource type="Script" path="res://CharacterBody2D.gd" id="1_1p2vy"]
+[ext_resource type="Texture2D" uid="uid://dosughwphpdx" path="res://icon.svg" id="2_7yfse"]
+[ext_resource type="Script" path="res://Pistol.gd" id="3_b2x15"]
+[ext_resource type="Texture2D" uid="uid://cth3ttenroouw" path="res://5888c72bbc2fc2ef3a1860d7-3758505086.png" id="4_hrti4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ddcju"]
+size = Vector2(20, 15.2778)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ywq3u"]
+radius = 14.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_1p2vy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.216211, 0.342968)
+texture = ExtResource("2_7yfse")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -11)
+scale = Vector2(1.4, 1.44)
+shape = SubResource("RectangleShape2D_ddcju")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_ywq3u")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="Hand" type="Node2D" parent="."]
+
+[node name="Pistol" type="Sprite2D" parent="Hand"]
+position = Vector2(24, -6)
+scale = Vector2(-0.177316, 0.0379383)
+texture = ExtResource("2_7yfse")
+script = ExtResource("3_b2x15")
+
+[node name="RayCast2D" type="RayCast2D" parent="Hand/Pistol"]
+position = Vector2(-62.0361, 0)
+rotation = 3.14159
+scale = Vector2(5.63965, -26.3586)
+target_position = Vector2(660, 0)
+collision_mask = 6
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="Pistol2" type="Sprite2D" parent="Hand/Pistol"]
+position = Vector2(45.1171, 237.227)
+rotation = -1.57067
+scale = Vector2(3.16519, 0.21464)
+skew = 0.00265694
+texture = ExtResource("2_7yfse")
+
+[node name="Pistol3" type="Sprite2D" parent="Hand/Pistol"]
+position = Vector2(24.9092, 148.349)
+rotation = -1.57067
+scale = Vector2(0.639774, 0.21464)
+skew = 0.00265694
+texture = ExtResource("2_7yfse")
+
+[node name="Pistol4" type="Sprite2D" parent="Hand/Pistol"]
+position = Vector2(-0.303955, 83.9567)
+rotation = -1.57067
+scale = Vector2(0.639774, 0.211722)
+skew = 0.00265694
+texture = ExtResource("2_7yfse")
+
+[node name="MuzzleFlash" type="Sprite2D" parent="Hand/Pistol"]
+visible = false
+position = Vector2(-90.2322, 0.0504761)
+rotation = -3.1378
+scale = Vector2(0.176532, 0.847753)
+texture = ExtResource("4_hrti4")
+
+[node name="Timer" type="Timer" parent="Hand/Pistol/MuzzleFlash"]
+wait_time = 0.05
+one_shot = true
+
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

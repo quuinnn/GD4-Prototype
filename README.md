@@ -6,7 +6,7 @@ im planning to make it an paid but open-source 2D movementr shooter once i learn
 ### Prerequisites:
 An operating system supporting Godot 4 (Linux, Windows, Android, MacOS, FreeBSD [or any other BSD with Linux compatibility], or the [Web Editor](https://editor.godotengine.org/releases/4.1.3.stable/)) and Godot 4 
 
-execute in a terminal "`$ git clone https://github.com/fortunef/GD4-Prototype.git`"
+execute in a terminal "`# git clone https://github.com/fortunef/GD4-Prototype.git`"
 
 if that doesn't work install git (or just download zip extract that and run it)
 
@@ -14,23 +14,27 @@ if that doesn't work install git (or just download zip extract that and run it)
 
 https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
-on debian and debian-based systems
+on Debian and Debian-based systems (Ubuntu, SteamOS 2.x, Pop!_OS, Vanilla etc)
+
 `# sudo apt install git-all`
 
-on RPM-based systems
+on RPM-based systems (CentOS, Fedora, openSUSE, etc)
+
 `# sudo dnf install git-all`
 
-on arch and arch based systems
+on Arch and Arch based systems (Manjaro, EndeavourOS, Garuda Linux, SteamOS 3.x)
+
 `# sudo pacman -S git`
 
 winget (Windows)
+
 `winget install --id Git.Git -e --source winget`
 
 # How to launch
 
-launch godot 4 click import in the top right then type /home/YOUR_USER/GD4-Prototype/project.godot
+Launch Godot 4 click import in the top right then type /home/YOUR_USER/GD4-Prototype/project.godot
 
-for windows/mac/bsd users im not sure where git defaults your git clone stuff
+For Windows/Mac/BSD users im not sure where git defaults your git clone stuff so find it yourself
 
 # Personal Checklist in order of priority
 - [x] Simple Raycasting Shooting

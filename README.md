@@ -3,9 +3,13 @@ A semi-decent prototype that I made from SCRATCH!??!?!?
 im planning to make it an paid but open-source 2D movementr shooter once i learn how to maek AI and when that happens its finna be over for all of yall
 
 ## How to run this project
+
+### Prerequisites:
+An operating system supporting Godot 4 (Linux, Windows, Android, MacOS, FreeBSD [or any other BSD with Linux compatibility], or the [Web Editor](https://editor.godotengine.org/releases/latest/)
+
 execute in a terminal "`$ git clone https://github.com/fortunef/GD4-Prototype.git`"
 
-if that doesn't work install git
+if that doesn't work install git (or just download zip extract that and run it)
 
 # How to install Git on most operating systems (Skip if already installed)
 

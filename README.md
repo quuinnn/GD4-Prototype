@@ -5,7 +5,7 @@ im planning to make it an paid but open-source 2D movementr shooter once i learn
 ## How to run this project
 
 ### Prerequisites:
-An operating system supporting Godot 4 (Linux, Windows, Android, MacOS, FreeBSD [or any other BSD with Linux compatibility], or the [Web Editor](https://editor.godotengine.org/releases/latest/)
+An operating system supporting Godot 4 (Linux, Windows, Android, MacOS, FreeBSD [or any other BSD with Linux compatibility], or the [Web Editor](https://editor.godotengine.org/releases/latest/)) and Godot 4 
 
 execute in a terminal "`$ git clone https://github.com/fortunef/GD4-Prototype.git`"
 

@@ -12,9 +12,11 @@ if that doesn't work install git (or just download zip extract that and run it)
 
 # How to install Git on most operating systems (Skip if already installed)
 
+### !! MOST OF THE LINUX DISTROS HERE HAVE GIT PREINSTALLED CHECK BY TYPING "git" INTO A TERMINAL !!
+
 https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
-on Debian and Debian-based systems (Ubuntu, SteamOS 2.x, Pop!_OS, Vanilla etc)
+on Debian and Debian-based systems (Ubuntu, SteamOS 2.x, Pop!_OS, VanillaOS etc)
 
 `# sudo apt install git-all`
 

@@ -36,12 +36,13 @@ Launch Godot 4 click import in the top right then type /home/YOUR_USER/GD4-Proto
 
 For Windows/Mac/BSD users im not sure where git defaults your git clone stuff so find it yourself
 
-# Personal Checklist in order of priority
+# Personal Checklist in order of priority & completion
 - [x] Simple Raycasting Shooting
+- [x] Reloading
 - [ ] Enemy AI
+- [ ] Enemy Knockback
 - [ ] Rogue-like Mechanics
 - [ ] A movement system I like
-- [ ] Reloading
 - [ ] Weapon Switching System like the one in Half Life
 - [ ] Visual and actual recoil
 - [ ] HUD

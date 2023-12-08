@@ -50,8 +50,6 @@ func _physics_process(delta):
 		
 # ------ Dashing ------ #
 
-	# if playing get comment out all this and the sprint and stopdashing functions
-
 	if Input.is_action_just_pressed("sprint"):
 		sprint()
 		

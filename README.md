@@ -40,8 +40,7 @@ For Windows/Mac/BSD users im not sure where git defaults your git clone stuff so
 
 # Personal Checklist in order of priority & completion
 - [x] Simple Raycasting Shooting
-
-~~Reloading~~
+- [x] Reloading
 - [ ] Enemy AI
 - [ ] Enemy Knockback
 - [ ] Rogue-like Mechanics

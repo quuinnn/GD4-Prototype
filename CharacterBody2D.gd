@@ -44,6 +44,9 @@ func _physics_process(delta):
 	#print("lastMoveDir is ", lastMoveDir)
 	print("Mag = ", currentAmmo)
 	print("Reserve ammo ", reserveAmmo)
+	#print(mousePos)
+	print("Status of jumpAvailible is ", jumpAvailible)
+	print("iudfsindfs",  wallJumpLimit)
 	
 # ------ Slow-Mo (Will make more use of cuz slow-mo is hella kewl) ------- #
 	if Input.is_action_pressed("slowMo") and isSlowMo == false:
@@ -73,6 +76,9 @@ func _physics_process(delta):
 		
 # ------ Coyote Time ------- #
 
+#FIXME broken (inf jump) i got a feeling it has to do with the coyoteTimer
+	if not is_on_floor():
+		velocity.y += gravity * delta
 		if jumpAvailible == true and coyoteTimer.is_stopped():
 			coyoteTimer.start()
 	else:
@@ -96,7 +102,6 @@ func _physics_process(delta):
 		shoot()
 		
 # ------ Wall jumping ------- #
-
 	if is_on_wall_only() and jumpAvailible:
 		jumpAvailible = false
 	if is_on_wall() and Input.is_action_just_pressed("jump") and wallJumpLimit != 3 and lastMoveDir == 1:
@@ -105,21 +110,19 @@ func _physics_process(delta):
 	elif is_on_wall() and Input.is_action_just_pressed("jump") and wallJumpLimit != 3 and lastMoveDir == 0:
 		velocity.y = jumpVel
 		wallJumpLimit += 1
-		
+
 # ------ Aiming ------- #
 
 	var mousePos = get_global_mouse_position()
 	rayCast2D.look_at(mousePos)
-	#print(mousePos)
-	print("Status of jumpAvailible is ", jumpAvailible)
 
 # ------ Jumping with coyote time ------- #
 
 	if Input.is_action_just_pressed("jump") and jumpAvailible:
 		velocity.y = jumpVel
 		jumpAvailible = false
-	if not is_on_floor():
-		velocity.y += gravity * delta
+	#if not is_on_floor():
+		#velocity.y += gravity * delta
 		
 # ------ Movement with acceleration ------- #
 

@@ -76,7 +76,6 @@ func _physics_process(delta):
 		
 # ------ Coyote Time ------- #
 
-#FIXME broken (inf jump) i got a feeling it has to do with the coyoteTimer
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		if jumpAvailible == true and coyoteTimer.is_stopped():

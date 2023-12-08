@@ -13,10 +13,6 @@ extends CharacterBody2D
 
 #GUN VARIABLES
 @export var fireRate = .2
-@export var reserveAmmo : int = 90
-@export var magCap : int = 15
-@export var currentAmmo : int = 15
-@export var reloadSpeed = 0.2
 
 @onready var rayCast2D = $Hand/Pistol/RayCast2D
 @onready var coyoteTimer = $CoyoteTimer
@@ -32,21 +28,15 @@ var wallJumpLimit : int = 0
 var lastMoveDir = null # 0 Means Left. 1 Means Right
 var isSlowMo : bool = false
 var isShooting : bool = false
-var zoomX = 4 # Tryna add aiming but first i gotta now how lerp works on anything other than movement
-var zoomY = 4
-var zoom = 12
-var isDashing : bool = false
 
 func _physics_process(delta):
 # ------ Debugging ------- #
 
 	#print(wallJumpLimit)
 	#print("lastMoveDir is ", lastMoveDir)
-	print("Mag = ", currentAmmo)
-	print("Reserve ammo ", reserveAmmo)
 	#print(mousePos)
 	print("Status of jumpAvailible is ", jumpAvailible)
-	print("iudfsindfs",  wallJumpLimit)
+	#aprint("iudfsindfs",  wallJumpLimit)
 	
 # ------ Slow-Mo (Will make more use of cuz slow-mo is hella kewl) ------- #
 	if Input.is_action_pressed("slowMo") and isSlowMo == false:
@@ -84,20 +74,9 @@ func _physics_process(delta):
 		jumpAvailible = true
 		wallJumpLimit = 0
 
-# ------ Gun system with a shitty reload script ------- #
+# ------ Gun system ------- #
 
-	if Input.is_action_just_pressed("reload") and currentAmmo != magCap:
-		reserveAmmo += currentAmmo
-		currentAmmo = 0
-		await get_tree().create_timer(reloadSpeed).timeout
-		currentAmmo = magCap
-		reserveAmmo -= magCap 
-		# I should really turn this reload script into a function
-		
-	if currentAmmo > magCap:
-		currentAmmo = magCap
-		
-	if Input.is_action_just_pressed("shoot") and isShooting == false and currentAmmo != 0:
+	if Input.is_action_just_pressed("shoot") and isShooting == false:
 		shoot()
 		
 # ------ Wall jumping ------- #
@@ -141,7 +120,6 @@ func _physics_process(delta):
 # ------ Functions!! ------- #
 
 func shoot():
-	currentAmmo -= 1
 	isShooting = true
 	$Hand/Pistol/MuzzleFlash.show()
 	muzzleFlashShowing = true

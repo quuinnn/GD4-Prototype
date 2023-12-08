@@ -3,13 +3,14 @@ extends CharacterBody2D
 #MOVEMENT VARIABLES
 @export var speed = 350
 @export var defaultSpeed = 350
+@export var defaultAccel = 40
 @export var jumpVel = -400
 @export var hp = 100.0
 @export var wallJumpKick = 1000
-@export var sprintSpeed = 400
 @export var accel = 40 #69
-@export var dashSpeed = 450
-@export var dashAccel = 150
+@export var sprintSpeed = 690
+@export var sprintAccel = 300
+@export var sprintTimeout = .5
 
 #GUN VARIABLES
 @export var fireRate = .2
@@ -28,6 +29,7 @@ var wallJumpLimit : int = 0
 var lastMoveDir = null # 0 Means Left. 1 Means Right
 var isSlowMo : bool = false
 var isShooting : bool = false
+var isDashing : bool = false
 
 func _physics_process(delta):
 # ------ Debugging ------- #
@@ -36,7 +38,7 @@ func _physics_process(delta):
 	#print("lastMoveDir is ", lastMoveDir)
 	#print(mousePos)
 	print("Status of jumpAvailible is ", jumpAvailible)
-	#aprint("iudfsindfs",  wallJumpLimit)
+	print("iudfsindfs",  wallJumpLimit)
 	
 # ------ Slow-Mo (Will make more use of cuz slow-mo is hella kewl) ------- #
 	if Input.is_action_pressed("slowMo") and isSlowMo == false:
@@ -46,6 +48,16 @@ func _physics_process(delta):
 		Engine.time_scale = 1
 		isSlowMo = false
 		
+# ------ Dashing ------ #
+
+	# if playing get comment out all this and the sprint and stopdashing functions
+
+	if Input.is_action_just_pressed("sprint"):
+		sprint()
+		
+	if is_on_floor() and isDashing == true:
+		stopDashing()
+
 # ------ Handles Movement checking ------- #
 		
 	if Input.is_action_just_pressed("moveLeft"):
@@ -54,7 +66,7 @@ func _physics_process(delta):
 		lastMoveDir = 1
 		
 	#if Input.is_action_pressed("sprint"): ( had to get rid of the sprinting cuz it messed up with the acceleration
-										#   i WILL replace it with a dashing mechanic)
+										#   i WILL replace it with a sprinting mechanic)
 		#speed = sprintSpeed
 	#else:
 		#speed = defaultSpeed
@@ -111,7 +123,7 @@ func _physics_process(delta):
 		velocity.x -= accel
 		$Sprite2D.flip_h = true
 	else:
-		velocity.x = lerpf(velocity.x,0,0.1)
+		velocity.x = lerpf(velocity.x,0,0.1) #0.1
 	
 	velocity.x = clamp(velocity.x, -speed, speed)
 
@@ -144,6 +156,16 @@ func _on_coyote_timer_timeout():
 func takeDamage():
 	hp -= 10
 
+func sprint():
+	speed = sprintSpeed
+	accel = sprintAccel
+	isDashing = true
+	
+func stopDashing():
+	await get_tree().create_timer(sprintTimeout).timeout
+	speed = defaultSpeed
+	accel = defaultAccel
+	isDashing == false
 # if youre reading this i appericatebasdjis that youre wasting your time to look at my shitty code 
 # that NEEDS optimisation
 # also i added all these comments to make my code easier to go through if anyone wants to fork this or what ever

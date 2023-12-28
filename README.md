@@ -54,4 +54,4 @@ For Windows/Mac/BSD users im not sure where git defaults your git clone stuff so
 - [ ] Gore System
 
 # License
-GD4-Prototype is licensed under the [GNU General Public License v3.0](https://github.com/fortunef/GD4-Prototype/blob/main/LICENSE) this license allows anyone to copy, modify and distribute this software but with absoulutly ZERO warranty. More info on the License can be found at the [GNU Official Website](https://www.gnu.org/licenses/gpl-3.0.en.html)
+GD4-Prototype is licensed under the [GNU General Public License v3.0](https://github.com/fortunef/GD4-Prototype/blob/main/LICENSE) this license allows anyone to copy, modify and distribute this software but with absolutely **ZERO** warranty. More info on the License can be found at the [GNU Official Website](https://www.gnu.org/licenses/gpl-3.0.en.html)

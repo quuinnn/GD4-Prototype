@@ -164,7 +164,3 @@ func stopDashing():
 	speed = defaultSpeed
 	accel = defaultAccel
 	isDashing == false
-# if youre reading this i appericatebasdjis that youre wasting your time to look at my shitty code 
-# that NEEDS optimisation
-# also i added all these comments to make my code easier to go through if anyone wants to fork this or what ever
-# but REMEMBER its GPLv3 licensed you HAVE to publish the source-code because free software == good

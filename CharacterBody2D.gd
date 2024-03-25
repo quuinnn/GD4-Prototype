@@ -8,9 +8,9 @@ extends CharacterBody2D
 @export var hp = 100.0
 @export var wallJumpKick = 1000
 @export var accel = 40 #69
-@export var sprintSpeed = 690
-@export var sprintAccel = 300
-@export var sprintTimeout = .5
+@export var dashSpeed = 690
+@export var dashAccel = 300
+@export var dashTimeout = .5
 
 #GUN VARIABLES
 @export var fireRate = .2
@@ -19,12 +19,13 @@ extends CharacterBody2D
 @onready var coyoteTimer = $CoyoteTimer
 @onready var player = $"."
 @onready var camera2D = $Camera2D
+@onready var frameFreezeMan = $"../frameFreeze"
+var muzzleFlashShowing : bool = false
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
+# MORE MOVEMENT VARIABLES :33
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var jumpAvailible : bool = true
 var dead : bool = false
-var muzzleFlashShowing : bool = false
 var wallJumpLimit : int = 0
 var lastMoveDir = null # 0 Means Left. 1 Means Right
 var isSlowMo : bool = false
@@ -43,7 +44,7 @@ func _physics_process(delta):
 # ------ Slow-Mo (Will make more use of cuz slow-mo is hella kewl) ------- #
 	if Input.is_action_pressed("slowMo") and isSlowMo == false:
 		Engine.time_scale = 0.5
-		isSlowMo = true 
+		isSlowMo = true
 	elif Input.is_action_just_released("slowMo") and isSlowMo == true:
 		Engine.time_scale = 1
 		isSlowMo = false
@@ -51,10 +52,12 @@ func _physics_process(delta):
 # ------ Dashing ------ #
 
 	if Input.is_action_just_pressed("sprint"):
-		sprint()
+		dash()
 		
 	if is_on_floor() and isDashing == true:
 		stopDashing()
+	if is_on_floor() and isDashing == false:
+		accel = defaultAccel
 
 # ------ Handles Movement checking ------- #
 		
@@ -63,9 +66,9 @@ func _physics_process(delta):
 	elif Input.is_action_just_pressed("moveRight"):
 		lastMoveDir = 1
 		
-	#if Input.is_action_pressed("sprint"): ( had to get rid of the sprinting cuz it messed up with the acceleration
-										#   i WILL replace it with a sprinting mechanic)
-		#speed = sprintSpeed
+	#if Input.is_action_pressed("dash"): ( had to get rid of the dashing cuz it messed up with the acceleration
+										#   i WILL replace it with a dashing mechanic)
+		#speed = dashSpeed
 	#else:
 		#speed = defaultSpeed
 		
@@ -90,6 +93,7 @@ func _physics_process(delta):
 		shoot()
 		
 # ------ Wall jumping ------- #
+
 	if is_on_wall_only() and jumpAvailible:
 		jumpAvailible = false
 	if is_on_wall() and Input.is_action_just_pressed("jump") and wallJumpLimit != 3 and lastMoveDir == 1:
@@ -111,6 +115,8 @@ func _physics_process(delta):
 		jumpAvailible = false
 	#if not is_on_floor():
 		#velocity.y += gravity * delta
+	#if Input.is_action_just_released("jump") && velocity.y < 0:
+		#velocity.y = 0
 		
 # ------ Movement with acceleration ------- #
 
@@ -137,7 +143,7 @@ func shoot():
 		rayCast2D.get_collider().takeDamage()
 		isShooting = true
 	if isShooting:
-		await get_tree().create_timer(fireRate).timeout 
+		await get_tree().create_timer(fireRate).timeout
 		isShooting = false
 	if muzzleFlashShowing and isShooting:
 		await get_tree().create_timer(0.05).timeout
@@ -154,13 +160,15 @@ func _on_coyote_timer_timeout():
 func takeDamage():
 	hp -= 10
 
-func sprint():
-	speed = sprintSpeed
-	accel = sprintAccel
+func dash():
 	isDashing = true
+	speed = dashSpeed
+	accel = dashAccel
+	#frameFreezeMan.frameFreeze()
 	
 func stopDashing():
-	await get_tree().create_timer(sprintTimeout).timeout
+	await get_tree().create_timer(dashTimeout).timeout
 	speed = defaultSpeed
-	accel = defaultAccel
-	isDashing == false
+	#accel = defaultAccel
+	if is_on_floor() and isDashing == true:
+		isDashing = false

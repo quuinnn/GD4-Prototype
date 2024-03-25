@@ -46,7 +46,7 @@ For Windows/Mac/BSD users im not sure where git defaults your git clone stuff so
 - [ ] Enemy AI
 - [ ] Enemy Knockback
 - [ ] Rogue-like Mechanics
-- [ ] A movement system I like
+- [ ] A movement system I like (getting closer to that goal)
 - [ ] Weapon Switching System like the one in Half Life
 - [ ] Visual and actual recoil
 - [ ] HUD

@@ -36,9 +36,7 @@ winget (Windows)
 
 # How to launch
 
-Launch Godot 4.2 click import in the top right then type /home/YOUR_USER/GD4-Prototype/project.godot
-
-For Windows/Mac/BSD users im not sure where git defaults your git clone stuff so find it yourself
+Launch Godot 4.2 click import the umm the umm the project.godot file
 
 # Personal Checklist in order of priority & completion
 - [x] Simple Raycasting Shooting

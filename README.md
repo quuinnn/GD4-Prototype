@@ -1,14 +1,18 @@
 # GD4-Prototype
-A semi-decent prototype that I made from SCRATCH!??!?!?
-im planning to make it an paid but open-source 2D movementr shooter once i learn how to maek AI and when that happens its finna be over for all of yall
+I intend for this to be a movement shooter with Celeste-like dashing & movement
 
 ## How to run this project
 ### Prerequisites:
-An operating system supporting [Godot 4.2](https://github.com/godotengine/godot/releases/tag/4.2-stable)  (Linux, Windows, Android, MacOS, {*BSD}(https://docs.godotengine.org/en/latest/contributing/development/compiling/compiling_for_linuxbsd.html), or the [Web Editor](https://editor.godotengine.org/releases/4.2.stable/)) 
+An operating system and CPU Architecture (AMD & ARM) supporting [Godot 4.2](https://github.com/godotengine/godot/releases/tag/4.2-stable)  (Linux, Windows, Android, MacOS, [*BSD + UNIX](https://docs.godotengine.org/en/latest/contributing/development/compiling/compiling_for_linuxbsd.html), or the [Web Editor](https://editor.godotengine.org/releases/4.2.stable/)) and Godot 4.2
 
-if you're a weirdo and not on those operating systems (OR it just doesnt work) but you have flatpak support use the [Flatpak](https://flathub.org/apps/org.godotengine.Godot)
+if you're a weirdo and not on any of those operating systems. [Compile from source](https://docs.godotengine.org/en/latest/contributing/development/compiling/index.html)
 
-execute in a terminal "`# git clone https://github.com/fortunef/GD4-Prototype.git`"
+execute in a terminal  
+``` sh
+git clone https://github.com/fortunef/GD4-Prototype.git
+cd GD4-Prototype
+godot project.godot # omit if you have Godot installed on flatpak or steam
+```
 
 if that doesn't work install git (or just download zip extract that and run it)
 
@@ -19,24 +23,31 @@ if that doesn't work install git (or just download zip extract that and run it)
 https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
 on Debian and Debian-based systems (Ubuntu, SteamOS 2.x, Pop!_OS, VanillaOS etc)
-
-`# sudo apt install git-all`
-
-on RPM-based systems (CentOS, Fedora, openSUSE, etc)
-
-`# sudo dnf install git-all`
-
-on Arch and Arch based systems (Manjaro, EndeavourOS, Garuda Linux, SteamOS 3.x)
-
-`# sudo pacman -S git`
-
+``` sh
+apt install git-all
+```
+on RHEL and RHEL-based systems (CentOS, Fedora, etc)
+``` sh
+dnf install git-all
+```
+on Arch and Arch based systems (Artix, EndeavourOS, ALARM, SteamOS 3.x)
+``` sh 
+sudo pacman -S git
+```
 winget (Windows)
+``` powershell
+winget install --id Git.Git -e --source winget
+```
+Gentoo and Gentoo-based systems (Funtoo, Calculate Linux, Macaroni Linux, Xenia Linux, etc)
 
-`winget install --id Git.Git -e --source winget`
+setup USEFLAGS according to [the wiki](https://wiki.gentoo.org/wiki/Git) if you want an optimised package
+``` sh
+emerge git
+```
 
 # How to launch
 
-Launch Godot 4.2 click import the umm the umm the project.godot file
+Launch Godot 4.2 click import and select the project.godot file
 
 # Personal Checklist in order of priority & completion
 - [x] Simple Raycasting Shooting
@@ -52,4 +63,4 @@ Launch Godot 4.2 click import the umm the umm the project.godot file
 - [ ] Gore System
 
 # License
-GD4-Prototype is licensed under the [GNU General Public License v3.0](https://github.com/fortunef/GD4-Prototype/blob/main/LICENSE) this license allows anyone to copy, modify and distrobute this software in verbatim or modified but with absolutely **ZERO** warranty. More info on the License can be found at the [GNU Official Website](https://www.gnu.org/licenses/gpl-3.0.en.html)
+GD4-Prototype is licensed under the [GNU General Public License v3.0](https://github.com/fortunef/GD4-Prototype/blob/main/LICENSE) this license allows anyone to copy, modify and distribute this software in verbatim or in modified form, but with absolutely **ZERO** warranty. More info on the License can be found at the [GNU Official Website](https://www.gnu.org/licenses/gpl-3.0.en.html)

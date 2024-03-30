@@ -32,7 +32,7 @@ dnf install git-all
 ```
 on Arch and Arch based systems (Artix, EndeavourOS, ALARM, SteamOS 3.x)
 ``` sh 
-sudo pacman -S git
+pacman -S git
 ```
 winget (Windows)
 ``` powershell

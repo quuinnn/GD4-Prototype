@@ -9,40 +9,9 @@ if you're a weirdo and not on any of those operating systems. [Compile from sour
 
 execute in a terminal  
 ``` sh
-git clone https://github.com/fortunef/GD4-Prototype.git
+git clone https://github.com/quuinnn/GD4-Prototype.git
 cd GD4-Prototype
 godot project.godot # omit if you have Godot installed on flatpak or steam
-```
-
-if that doesn't work install git (or just download zip extract that and run it)
-
-# How to install Git on most operating systems (Skip if already installed)
-
-### !! MOST OF THE LINUX DISTROS HERE HAVE GIT PREINSTALLED CHECK BY TYPING "git" INTO A TERMINAL !!
-
-https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
-
-on Debian and Debian-based systems (Ubuntu, SteamOS 2.x, Pop!_OS, VanillaOS etc)
-``` sh
-apt install git-all
-```
-on RHEL and RHEL-based systems (CentOS, Fedora, etc)
-``` sh
-dnf install git-all
-```
-on Arch and Arch based systems (Artix, EndeavourOS, ALARM, SteamOS 3.x)
-``` sh 
-pacman -S git
-```
-winget (Windows)
-``` powershell
-winget install --id Git.Git -e --source winget
-```
-Gentoo and Gentoo-based systems (Funtoo, Calculate Linux, Macaroni Linux, Xenia Linux, etc)
-
-setup USEFLAGS according to [the wiki](https://wiki.gentoo.org/wiki/Git) if you want an optimised package
-``` sh
-emerge git
 ```
 
 # How to launch

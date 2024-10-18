@@ -3,15 +3,15 @@ I intend for this to be a movement shooter with Celeste-like dashing & movement
 
 ## How to run this project
 ### Prerequisites:
-An operating system and CPU Architecture (AMD & ARM) supporting [Godot 4.2](https://github.com/godotengine/godot/releases/tag/4.2-stable)  (Linux, Windows, Android, MacOS, [*BSD + UNIX](https://docs.godotengine.org/en/latest/contributing/development/compiling/compiling_for_linuxbsd.html), or the [Web Editor](https://editor.godotengine.org/releases/4.2.stable/)) and Godot 4.2
+An operating system and CPU Architecture (x86 & ARM) supporting [Godot 4.2](https://github.com/godotengine/godot/releases/tag/4.2-stable)  (Linux, Windows, Android, MacOS, [*BSD + UNIX](https://docs.godotengine.org/en/latest/contributing/development/compiling/compiling_for_linuxbsd.html), or the [Web Editor](https://editor.godotengine.org/releases/4.2.stable/)) and Godot 4.2
 
 if you're a weirdo and not on any of those operating systems. [Compile from source](https://docs.godotengine.org/en/latest/contributing/development/compiling/index.html)
 
 execute in a terminal  
 ``` sh
 git clone https://github.com/quuinnn/GD4-Prototype.git
-cd GD4-Prototype
-godot project.godot # omit if you have Godot installed on flatpak or steam
+cd GD4-Prototype # omit this line and the lines below if you have Godot installed on flatpak or steam
+godot project.godot
 ```
 
 # How to launch

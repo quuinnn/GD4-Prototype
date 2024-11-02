@@ -69,7 +69,7 @@ func _physics_process(delta):
 	if dead == true:
 		kill()
 		
-	# ------ ???? What's the purpose of this? Why'd I even... never mind ------- #
+	# ------ Makes the Enemy jump when it collides with a wall whilst on a floor.dada ------- #
 	
 	if is_on_wall() and is_on_floor() and rayCast2D.get_collider() != player:
 		velocity.y = jumpVel

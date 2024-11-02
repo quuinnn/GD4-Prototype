@@ -54,7 +54,6 @@ Launch Godot 4.2 click import and select the project.godot file
 - [x] Reloading
 - [ ] Enemy AI
 - [ ] Enemy Knockback
-- [ ] Rogue-like Mechanics
 - [ ] A movement system I like (getting closer to that goal)
 - [ ] Weapon Switching System like the one in Half Life
 - [ ] Visual and actual recoil

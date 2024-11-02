@@ -39,7 +39,8 @@ func _physics_process(delta):
 	#print("lastMoveDir is ", lastMoveDir)
 	#print(mousePos)
 	print("Status of jumpAvailible is ", jumpAvailible)
-	print("iudfsindfs",  wallJumpLimit)
+	print("(Limit = 3) Status of wallJumpLimit is ",  wallJumpLimit)
+	print("Current HP is ", hp)
 	
 # ------ Slow-Mo (Will make more use of cuz slow-mo is hella kewl) ------- #
 	if Input.is_action_pressed("slowMo") and isSlowMo == false:

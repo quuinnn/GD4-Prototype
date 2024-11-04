@@ -44,6 +44,7 @@ func _physics_process(delta):
 	print("(Limit = 3) Status of wallJumpLimit is ",  wallJumpLimit)
 	print("Current HP is ", hp)
 	print("Velocity X is ", int(velocity.x)) # The int() converts it to an interger for simplicity
+	print("Velocity Y is ", int(velocity.y))
 	
 # ------ Slow-Mo (Will make more use of cuz slow-mo is hella kewl) ------- #
 	if Input.is_action_pressed("slowMo") and isSlowMo == false:
@@ -57,7 +58,6 @@ func _physics_process(delta):
 
 	if Input.is_action_just_pressed("sprint"):
 		dash()
-		
 	if is_on_floor() and isDashing == true:
 		stopDashing()
 	if is_on_floor() and isDashing == false:
@@ -90,7 +90,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("shoot") and isShooting == false:
 		shoot()
 		
-# ------ Wall jumping -------
+# ------ Wall jumping ------- #
 
 	if is_on_wall_only() and jumpAvailible:
 		jumpAvailible = false

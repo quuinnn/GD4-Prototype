@@ -6,23 +6,25 @@ extends CharacterBody2D
 @export var defaultAccel = 40
 @export var jumpVel = -400
 @export var hp = 100.0
-@export var wallJumpKick = 1000
+@export var wallJumpKick = 1000 # Isn't being used?
 @export var accel = 40 #69
+@export var accelFactor = 0.5 # Factor to slow down acceleration
+@export var deaccel = 0.1
+@export var airDeaccel = 0.010 # Should always be lower than deaccel
 @export var dashSpeed = 690
 @export var dashAccel = 300
 @export var dashTimeout = .5
 
 #GUN VARIABLES
 @export var fireRate = .2
-
 @onready var rayCast2D = $Hand/Pistol/RayCast2D
 @onready var coyoteTimer = $CoyoteTimer
 @onready var player = $"."
 @onready var camera2D = $Camera2D
-@onready var frameFreezeMan = $"../frameFreeze"
+#@onready var frameFreezeMan = $"../frameFreeze"
 var muzzleFlashShowing : bool = false
 
-# MORE MOVEMENT VARIABLES :33
+# MORE MOVEMENT VARIABLES
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var jumpAvailible : bool = true
 var dead : bool = false
@@ -41,16 +43,17 @@ func _physics_process(delta):
 	print("Status of jumpAvailible is ", jumpAvailible)
 	print("(Limit = 3) Status of wallJumpLimit is ",  wallJumpLimit)
 	print("Current HP is ", hp)
+	print("Velocity X is ", int(velocity.x)) # The int() converts it to an interger for simplicity
 	
 # ------ Slow-Mo (Will make more use of cuz slow-mo is hella kewl) ------- #
 	if Input.is_action_pressed("slowMo") and isSlowMo == false:
-		Engine.time_scale = 0.5
+		Engine.time_scale = 0.75
 		isSlowMo = true
 	elif Input.is_action_just_released("slowMo") and isSlowMo == true:
 		Engine.time_scale = 1
 		isSlowMo = false
 		
-# ------ Dashing ------ #
+# ------ Initiating Dashing ------ # Thiking 'bout scrapping this for a hoverboard mechanic like the one in Echo Point Nova
 
 	if Input.is_action_just_pressed("sprint"):
 		dash()
@@ -60,18 +63,12 @@ func _physics_process(delta):
 	if is_on_floor() and isDashing == false:
 		accel = defaultAccel
 
-# ------ Handles Movement checking ------- #
+# ------ Handles Movement Direction checking ------- #
 		
 	if Input.is_action_just_pressed("moveLeft"):
 		lastMoveDir = 0
 	elif Input.is_action_just_pressed("moveRight"):
 		lastMoveDir = 1
-		
-	#if Input.is_action_pressed("dash"): ( had to get rid of the dashing cuz it messed up with the acceleration
-										#   i WILL replace it with a dashing mechanic)
-		#speed = dashSpeed
-	#else:
-		#speed = defaultSpeed
 		
 # ------ Inevitable Death ------- #
 
@@ -93,7 +90,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("shoot") and isShooting == false:
 		shoot()
 		
-# ------ Wall jumping ------- #
+# ------ Wall jumping -------
 
 	if is_on_wall_only() and jumpAvailible:
 		jumpAvailible = false
@@ -121,22 +118,25 @@ func _physics_process(delta):
 		
 # ------ Movement with acceleration ------- #
 
+	# Movement is frame-rate dependent. Needs to be fixed.
 	if Input.is_action_pressed("moveRight"):
-		velocity.x += accel
+		velocity.x += accel * accelFactor # Applies acceleration and times it by accelFactor
 		$Sprite2D.flip_h = false
 	elif Input.is_action_pressed("moveLeft"):
-		velocity.x -= accel
-		$Sprite2D.flip_h = true
+		velocity.x -= accel * accelFactor
+		$Sprite2D.flip_h = true # Flips the sprite to match the direction of movement
+	elif is_on_floor():
+		velocity.x = lerpf(velocity.x,0,deaccel) # Deaccelerates to 0 horizontal velocity, lower value equals longer time to deaccel to 0
 	else:
-		velocity.x = lerpf(velocity.x,0,0.1) #0.1
+		velocity.x = lerpf(velocity.x,0,airDeaccel)
 	
-	velocity.x = clamp(velocity.x, -speed, speed)
+	velocity.x = clamp(velocity.x, -900, 900) # Limits (Clamps) top speed.
 
 	move_and_slide()
 
 # ------ Functions!! ------- #
 
-func shoot():
+func shoot(): # Need to make this be projectile-based instead of ray-casting based
 	isShooting = true
 	$Hand/Pistol/MuzzleFlash.show()
 	muzzleFlashShowing = true

@@ -1,9 +1,10 @@
 extends CharacterBody2D
 
 #MOVEMENT VARIABLES
-@export var speed = 350
-@export var defaultSpeed = 350
-@export var defaultAccel = 40
+@export var speed = null # Dummy variable so that the dashing stuff doesn't give me errors. I gotta remove that shit.
+@export var topSpeed = 900
+@export var defaultSpeed = 350 # Isn't being used?
+@export var defaultAccel = 40 # Isn't being used?
 @export var jumpVel = -400
 @export var hp = 100.0
 @export var wallJumpKick = 1000 # Isn't being used?
@@ -11,7 +12,9 @@ extends CharacterBody2D
 @export var accelFactor = 0.5 # Factor to slow down acceleration
 @export var deaccel = 0.1
 @export var airDeaccel = 0.010 # Should always be lower than deaccel
-@export var dashSpeed = 690
+@export var crouchDeaccel = 0.05 # Should always be lower than deaccel, but higher than airDeaccel
+@export var crouchAccel = 15
+@export var dashSpeed = 690 # Isn't being used
 @export var dashAccel = 300
 @export var dashTimeout = .5
 
@@ -33,6 +36,7 @@ var lastMoveDir = null # 0 Means Left. 1 Means Right
 var isSlowMo : bool = false
 var isShooting : bool = false
 var isDashing : bool = false
+var isCrouching : bool = false
 
 func _physics_process(delta):
 # ------ Debugging ------- #
@@ -40,9 +44,9 @@ func _physics_process(delta):
 	#print(wallJumpLimit)
 	#print("lastMoveDir is ", lastMoveDir)
 	#print(mousePos)
-	print("Status of jumpAvailible is ", jumpAvailible)
-	print("(Limit = 3) Status of wallJumpLimit is ",  wallJumpLimit)
-	print("Current HP is ", hp)
+	#print("Status of jumpAvailible is ", jumpAvailible)
+	#print("(Limit = 3) Status of wallJumpLimit is ",  wallJumpLimit)
+	#print("Current HP is ", hp)
 	print("Velocity X is ", int(velocity.x)) # The int() converts it to an interger for simplicity
 	print("Velocity Y is ", int(velocity.y))
 	
@@ -118,19 +122,49 @@ func _physics_process(delta):
 		
 # ------ Movement with acceleration ------- #
 
-	# Movement is frame-rate dependent. Needs to be fixed.
-	if Input.is_action_pressed("moveRight"):
-		velocity.x += accel * accelFactor # Applies acceleration and times it by accelFactor
-		$Sprite2D.flip_h = false
-	elif Input.is_action_pressed("moveLeft"):
-		velocity.x -= accel * accelFactor
-		$Sprite2D.flip_h = true # Flips the sprite to match the direction of movement
-	elif is_on_floor():
-		velocity.x = lerpf(velocity.x,0,deaccel) # Deaccelerates to 0 horizontal velocity, lower value equals longer time to deaccel to 0
-	else:
-		velocity.x = lerpf(velocity.x,0,airDeaccel)
+	var is_on_slope
+	var floorNormal = get_floor_normal()
+	var slopeAngle = floorNormal.angle()
+	print("Slope angle = ", slopeAngle)
+	print("Is on slope = ", is_on_slope)
+	print("Is crouching = ", isCrouching)
 	
-	velocity.x = clamp(velocity.x, -900, 900) # Limits (Clamps) top speed.
+	if Input.is_action_just_pressed("crouch"):
+		crouch()
+
+	if is_on_floor():
+		#is_on_slope = false
+		#floorNormal = get_floor_normal()
+		#slopeAngle = floorNormal.angle()
+		if slopeAngle < -0.8 and slopeAngle > -0.7:
+			is_on_slope = true
+		else:
+			is_on_slope = false
+		#if is_on_slope == true: #Need to sort out the is on slope stuff first.
+			#if velocity.x != 0: 
+				#velocity.y -= slopeAngle * speed * 0.5
+	# Movement is frame-rate dependent. Needs to be fixed.
+	if isCrouching == false: # Non-crouching acceleration
+		if Input.is_action_pressed("moveRight"):
+			velocity.x += accel * accelFactor # Applies acceleration and multiplies it by accelFactor
+			$Sprite2D.flip_h = false
+		elif Input.is_action_pressed("moveLeft"):
+			velocity.x -= accel * accelFactor
+			$Sprite2D.flip_h = true # Flips the sprite to match the direction of movement
+	elif is_on_floor() and isCrouching == false:
+		velocity.x = lerpf(velocity.x,0,deaccel) # Deaccelerates to 0 horizontal velocity, lower value equals longer time to deaccel to 0
+	elif not is_on_floor() and isCrouching == false:
+		velocity.x = lerpf(velocity.x,0,airDeaccel) # Same thing as before but for in air deacceleration which should always be lower then the former deaccel
+	elif isCrouching == true and is_on_floor(): # Whilst crouching on floor
+		velocity.x = lerpf(velocity.x,0,crouchDeaccel)
+	#if isCrouching: # Gonna continue this later
+		#if Input.is_action_pressed("moveRight"):
+			#velocity.x += crouchAccel  * accelFactor # Applies acceleration and multiplies it by accelFactor
+			#$Sprite2D.flip_h = false
+		#elif Input.is_action_pressed("moveLeft"):
+			#velocity.x -= crouchAccel * accelFactor
+			#$Sprite2D.flip_h = true # Flips the sprite to match the direction of movement
+	velocity.x = clamp(velocity.x, -topSpeed, topSpeed) # Limits (Clamps) top speed.
 
 	move_and_slide()
 
@@ -173,3 +207,23 @@ func stopDashing():
 	#accel = defaultAccel
 	if is_on_floor() and isDashing == true:
 		isDashing = false
+		
+func crouch():
+	if isCrouching == false:
+		isCrouching = true
+		$crouchingShape.disabled = false
+		$crouchingShape2.disabled = false
+		$normalShape.disabled = true
+		$normalShape2.disabled = true
+		$Sprite2D.scale.y = 0.211
+		$Sprite2D.scale.x = 0.216
+		$Sprite2D.position.y = 8.475
+	else:
+		isCrouching=false
+		$crouchingShape.disabled = true
+		$crouchingShape2.disabled = true
+		$normalShape.disabled = false
+		$normalShape2.disabled = false
+		$Sprite2D.scale.y = 0.343
+		$Sprite2D.scale.x = 0.216
+		$Sprite2D.position.y = 0.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://k4jegxrfa0xq"]
+[gd_scene load_steps=9 format=3 uid="uid://k4jegxrfa0xq"]
 
 [ext_resource type="Script" path="res://CharacterBody2D.gd" id="1_1p2vy"]
 [ext_resource type="Texture2D" uid="uid://dosughwphpdx" path="res://icon.svg" id="2_7yfse"]
@@ -11,21 +11,36 @@ size = Vector2(20, 20.8333)
 [sub_resource type="CircleShape2D" id="CircleShape2D_ywq3u"]
 radius = 14.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xh8i"]
+size = Vector2(28, 13)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rugt0"]
+radius = 14.0357
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_1p2vy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.216211, 0.342968)
+position = Vector2(0, -0.0250235)
+scale = Vector2(0.216211, 0.343359)
 texture = ExtResource("2_7yfse")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -7.00001)
+[node name="normalShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
 scale = Vector2(1.4, 1.44)
 shape = SubResource("RectangleShape2D_ddcju")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+[node name="normalShape2" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_ywq3u")
+
+[node name="crouchingShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_3xh8i")
+
+[node name="crouchingShape2" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_rugt0")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)

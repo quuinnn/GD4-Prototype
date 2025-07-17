@@ -155,15 +155,15 @@ func _physics_process(delta):
 		velocity.x = lerpf(velocity.x,0,deaccel) # Deaccelerates to 0 horizontal velocity, lower value equals longer time to deaccel to 0
 	elif not is_on_floor() and isCrouching == false:
 		velocity.x = lerpf(velocity.x,0,airDeaccel) # Same thing as before but for in air deacceleration which should always be lower then the former deaccel
-	elif isCrouching == true and is_on_floor(): # Whilst crouching on floor
+	elif isCrouching and is_on_floor(): # Whilst crouching on floor
 		velocity.x = lerpf(velocity.x,0,crouchDeaccel)
-	#if isCrouching: # Gonna continue this later
-		#if Input.is_action_pressed("moveRight"):
-			#velocity.x += crouchAccel  * accelFactor # Applies acceleration and multiplies it by accelFactor
-			#$Sprite2D.flip_h = false
-		#elif Input.is_action_pressed("moveLeft"):
-			#velocity.x -= crouchAccel * accelFactor
-			#$Sprite2D.flip_h = true # Flips the sprite to match the direction of movement
+	if isCrouching: # Gonna continue this later
+		if Input.is_action_pressed("moveRight"):
+			velocity.x += crouchAccel  * accelFactor # Applies acceleration and multiplies it by accelFactor
+			$Sprite2D.flip_h = false
+		elif Input.is_action_pressed("moveLeft"):
+			velocity.x -= crouchAccel * accelFactor
+			$Sprite2D.flip_h = true # Flips the sprite to match the direction of movement
 	velocity.x = clamp(velocity.x, -topSpeed, topSpeed) # Limits (Clamps) top speed.
 
 	move_and_slide()

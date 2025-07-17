@@ -3,13 +3,13 @@ side project
 
 ## How to run this project
 ### Prerequisites:
-An operating system and CPU Architecture (32 or 64-bit x86 & ARM) supporting [Godot 4.3](https://github.com/godotengine/godot/releases/tag/4.3-stable)  (Linux, Windows, Android, MacOS, [*BSD + UNIX](https://docs.godotengine.org/en/latest/contributing/development/compiling/compiling_for_linuxbsd.html), or the [Web Editor](https://editor.godotengine.org/releases/4.3.stable/)) and Godot 4.3
+An operating system and CPU Architecture (32-bit or 64-bit x86 & ARM) supporting [Godot 4.4](https://github.com/godotengine/godot/releases/tag/4.4.1-stable)  (Linux, Windows, Android, MacOS, [*BSD + UNIX](https://docs.godotengine.org/en/latest/contributing/development/compiling/compiling_for_linuxbsd.html), or the [Web Editor](https://editor.godotengine.org/releases/4.4.stable/)) and Godot 4.4
 
 if you're a weirdo and not on any of those operating systems. [Compile from source](https://docs.godotengine.org/en/latest/contributing/development/compiling/index.html)
 
 execute in a terminal
 ``` sh
-git clone https://github.com/quuinnn/GD4-Prototype.git # omit everything below if you have godot installed on Flatpak or Steam
+git clone https://github.com/quuinnn/GD4-Prototype.git # omit everything below if you have installed godot in a way that it's not in your $PATH
 cd GD4-Prototype
 godot project.godot
 ```

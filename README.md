@@ -18,7 +18,7 @@ if that doesn't work install git (or just download zip extract that and run it)
 
 # How to launch
 
-Launch Godot 4.3 click import and select the project.godot file
+Launch Godot 4.4 click import and select the project.godot file
 
 # License
 GD4-Prototype is licensed under the [GNU General Public License v3.0](https://github.com/quuinnn/GD4-Prototype/blob/main/LICENSE) this license allows anyone to copy, modify and distribute this software in verbatim and in modified form, but with absolutely **ZERO** warranty. More info on the License can be found on the [Official GNU Website](https://www.gnu.org/licenses/gpl-3.0.en.html)

@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://k4jegxrfa0xq"]
 
-[ext_resource type="Script" path="res://CharacterBody2D.gd" id="1_1p2vy"]
+[ext_resource type="Script" uid="uid://dk6evycg82j68" path="res://CharacterBody2D.gd" id="1_1p2vy"]
 [ext_resource type="Texture2D" uid="uid://dosughwphpdx" path="res://icon.svg" id="2_7yfse"]
-[ext_resource type="Script" path="res://Pistol.gd" id="3_b2x15"]
+[ext_resource type="Script" uid="uid://c32r7na6t7v45" path="res://Pistol.gd" id="3_b2x15"]
 [ext_resource type="Texture2D" uid="uid://cth3ttenroouw" path="res://5888c72bbc2fc2ef3a1860d7-3758505086.png" id="4_hrti4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ddcju"]

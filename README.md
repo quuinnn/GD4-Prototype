@@ -1,5 +1,5 @@
 # GD4-Prototype
-side project
+abandoned side project
 
 ## How to run this project
 ### Prerequisites:
